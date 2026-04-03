@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anvesha – Certificate Download</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── THEME ─────────────────────────────────────── */
+    :root {
+      --navy:   #0C1D3A;
+      --gold:   #B8862A;
+      --gold-lt:#F4E4B8;
+      --cream:  #FDFAF4;
+      --white:  #FFFFFF;
+      --muted:  #6B7280;
+      --border: #E5DECE;
+      --danger: #B91C1C;
+      --success:#166534;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── HEADER ─────────────────────────────────────── */
+    header {
+      background: var(--navy);
+      padding: 28px 20px 24px;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .logo-badge {
+      width: 46px;
+      height: 46px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-badge svg { width: 26px; height: 26px; }
+
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--gold-lt);
+      letter-spacing: 2px;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: #94A3B8;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .wicasa-tag {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 11px;
+      color: #94A3B8;
+      letter-spacing: 1.5px;
+      border-top: 1px solid #2A3F5F;
+      padding-top: 8px;
+    }
+
+    /* ─── MAIN CARD ───────────────────────────────────── */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 16px 64px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 4px 32px rgba(12,29,58,0.08);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    /* ─── FORM ────────────────────────────────────────── */
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 8px;
+      letter-spacing: 0.4px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="tel"] {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-family: 'DM Sans', sans-serif;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      color: var(--navy);
+      background: var(--cream);
+      transition: border-color 0.15s;
+      letter-spacing: 1px;
+    }
+
+    input[type="tel"]:focus { border-color: var(--gold); }
+
+    input[type="tel"]::placeholder { color: #B0A890; letter-spacing: 0; }
+
+    button#lookupBtn {
+      padding: 12px 20px;
+      background: var(--navy);
+      color: var(--gold-lt);
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    button#lookupBtn:hover { background: #1a3260; }
+    button#lookupBtn:active { transform: scale(0.97); }
+
+    /* ─── RESULT STATES ───────────────────────────────── */
+    #result { margin-top: 24px; display: none; }
+
+    .result-success {
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: 12px;
+      padding: 20px 22px;
+    }
+
+    .result-success .greeting {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: var(--success);
+      margin-bottom: 4px;
+    }
+
+    .result-success .meta {
+      font-size: 13px;
+      color: #4B7C63;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--white);
+      text-decoration: none;
+      padding: 11px 22px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .download-btn:hover { background: #96691E; }
+    .download-btn:active { transform: scale(0.97); }
+
+    .download-btn svg { width: 16px; height: 16px; }
+
+    .result-error {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-size: 14px;
+      color: var(--danger);
+      line-height: 1.6;
+    }
+
+    /* ─── DIVIDER ─────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin: 28px 0;
+    }
+
+    .help-text {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 12px;
+      color: #9CA3AF;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 28px 20px; }
+      .input-group { flex-direction: column; }
+      button#lookupBtn { width: 100%; padding: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-row">
+    <div class="logo-badge">
+      <!-- Quill icon -->
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 4C20 4 14 6 12 14C10 10 6 8 4 9C8 10 10 14 10 18L12 14C14 6 20 4 20 4Z" fill="#B8862A"/>
+        <line x1="10" y1="18" x2="8" y2="22" stroke="#B8862A" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="brand-name">ANVESHA</span>
+  </div>
+  <div class="brand-sub">Monthly Newsletter</div>
+  <div class="wicasa-tag">WICASA · Western India Chartered Accountants Students' Association</div>
+</header>
+
+<main>
+  <div class="card">
+    <h1 class="card-title">Download Your Certificate</h1>
+    <p class="card-desc">
+      Enter the mobile number you submitted in the contribution form.
+      To Download Your Contribution Certificate.
+    </p>
+
+    <label for="mobileInput">Mobile Number</label>
+    <div class="input-group">
+      <input
+        type="tel"
+        id="mobileInput"
+        placeholder="Enter 10-digit number"
+        maxlength="10"
+        inputmode="numeric"
+        autocomplete="off"
+      />
+      <button id="lookupBtn" onclick="lookupCertificate()">Find Certificate</button>
+    </div>
+
+    <div id="result"></div>
+
+    <hr class="divider" />
+    <p class="help-text">
+      Having trouble? Contact CSN branch WICASA representative<br />
+      Email- wicasa.anvesha@gmail.com
+      Mo. No. +91 88300 59351 (Santosh Andhale).
+    </p>
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 WICASA &ndash; Chhatrapati Sambhajinagar Branch &middot; Anvesha Newsletter
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     CERTIFICATE DATA — EDIT THIS SECTION EACH MONTH
+     ───────────────────────────────────────────────────────────────────
+     Format:
+       "MOBILENUMBER": {
+         name: "Full Name",
+         category: "e.g. Articles / Rang aur Riwayat / Katha Kunj",
+         issue: "e.g. March 2025",
+         driveLink: "PASTE GOOGLE DRIVE DIRECT DOWNLOAD LINK HERE"
+       }
+
+     HOW TO GET THE GOOGLE DRIVE DIRECT DOWNLOAD LINK:
+       1. Upload certificate PDF to Google Drive
+       2. Right-click → Share → set to "Anyone with the link can view"
+       3. Copy the sharing link. It looks like:
+          https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+       4. Extract the FILE_ID from that URL
+       5. Paste it in the link below:
+          https://drive.google.com/uc?export=download&id=FILE_ID
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<script>
+ const CERTIFICATES = {
+    "8830059351": {
+      name: "Siddheshwar Honrao",
+      category: "Poerty (Rang And Riwaayat)",
+      issue: "March 2025",
+      driveLink: "https://drive.google.com/file/d/1E_PlTt-qQ0X0HIW0MyuyqiKHYBf_h3Ds/view?usp=sharing"
+    },
+    "8830059352": {
+      name: "Sanket Barwal",
+      category: "Untold Story(Katha Kunj)",
+      issue: "March 2025",
+      driveLink: "https://drive.google.com/file/d/1hswVPlG0_2BFKwTImOF-hOzwzxcntH8h/view?usp=sharing"
+    },
+    "8830059353": {
+      name: "Komal Satpute",
+      category: "Poerty (Rang And Riwaayat)",
+      issue: "March 2025",
+      driveLink: "https://drive.google.com/file/d/1nXdgNw97R1Ec5R3iaAM8-zj8VBrzLdZn/view?usp=sharing"
+    }
+    // ADD MORE ENTRIES ABOVE THIS LINE
+  };
+
+  // ── LOOKUP LOGIC ─────────────────────────────────────────
+  function lookupCertificate() {
+    const input = document.getElementById("mobileInput").value.trim();
+    const resultDiv = document.getElementById("result");
+
+    if (input.length !== 10 || !/^\d{10}$/.test(input)) {
+      resultDiv.style.display = "block";
+      resultDiv.innerHTML = `
+        <div class="result-error">
+          Please enter a valid 10-digit mobile number.
+        </div>`;
+      return;
+    }
+
+    const record = CERTIFICATES[input];
+
+    if (record) {
+      resultDiv.style.display = "block";
+      resultDiv.innerHTML = `
+        <div class="result-success">
+          <div class="greeting">Congratulations, ${record.name}!</div>
+          <div class="meta">
+            Contribution: ${record.category} &nbsp;&bull;&nbsp; Issue: ${record.issue}
+          </div>
+          <a class="download-btn" href="${record.driveLink}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download Certificate (PDF)
+          </a>
+        </div>`;
+    } else {
+      resultDiv.style.display = "block";
+      resultDiv.innerHTML = `
+        <div class="result-error">
+          No certificate found for this number. Please ensure you have entered the
+          mobile number used during form submission. If the issue persists,
+          contact the WICASA committee.
+        </div>`;
+    }
+  }
+
+  // Allow pressing Enter to trigger lookup
+  document.getElementById("mobileInput").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") lookupCertificate();
+  });
+
+  // Allow only numeric input
+  document.getElementById("mobileInput").addEventListener("input", function() {
+    this.value = this.value.replace(/\D/g, "");
+  });
+</script>
+
+</body>
+</html>
