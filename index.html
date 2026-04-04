@@ -183,7 +183,7 @@
     var btn = document.getElementById("lookupBtn");
 
     if (input.length !== 13 || isNaN(input.substring(0,10)) || !/^[A-Za-z]{3}$/.test(input.substring(10))) {
-      resultDiv.innerHTML = '<div class="result-error anim-pop">Please enter a valid 10-digit mobile number.</div>';
+      resultDiv.innerHTML = '<div class="result-error anim-pop">Please enter a valid 10-digit mobile number and first three letters of the MONTH E.g For "MARCH" use "MAR".</div>';
       return;
     }
 
