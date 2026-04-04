@@ -122,9 +122,9 @@
     <h1 class="card-title anim-fade-up">Download Your Certificate</h1>
     <p class="card-desc anim-fade-up-2">Enter the mobile number you submitted in the contribution form. Your participation certificate will appear below.</p>
     <div class="anim-fade-up-3">
-      <label for="mobileInput">Mobile Number</label>
+      <label for="mobileInput">Mobile Number + Month Code (e.g. 1234506789MAR)</label>
       <div class="input-group">
-        <input type="tel" id="mobileInput" placeholder="Enter 10-digit number" maxlength="10" inputmode="numeric" autocomplete="off" />
+        <input type="tel" id="mobileInput" placeholder="e.g. 1234506789MAR" maxlength="13" inputmode="text" autocomplete="off" />
         <button id="lookupBtn">Find Certificate</button>
       </div>
     </div>
@@ -182,7 +182,7 @@
     var resultDiv = document.getElementById("result");
     var btn = document.getElementById("lookupBtn");
 
-    if (input.length !== 10 || isNaN(input)) {
+    if (input.length !== 13 || isNaN(input.substring(0,10)) || !/^[A-Za-z]{3}$/.test(input.substring(10))) {
       resultDiv.innerHTML = '<div class="result-error anim-pop">Please enter a valid 10-digit mobile number.</div>';
       return;
     }
