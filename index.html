@@ -49,9 +49,9 @@
     .card-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 28px; }
     label { display: block; font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 8px; letter-spacing: 0.4px; }
     .input-group { display: flex; gap: 10px; }
-    input[type="tel"] { flex: 1; padding: 12px 16px; font-size: 16px; font-family: 'DM Sans', sans-serif; border: 1.5px solid var(--border); border-radius: 10px; outline: none; color: var(--navy); background: var(--cream); transition: border-color 0.2s, box-shadow 0.2s; letter-spacing: 1px; }
-    input[type="tel"]:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,134,42,0.12); }
-    input[type="tel"]::placeholder { color: #B0A890; letter-spacing: 0; }
+    input[type="text"] { flex: 1; padding: 12px 16px; font-size: 16px; font-family: 'DM Sans', sans-serif; border: 1.5px solid var(--border); border-radius: 10px; outline: none; color: var(--navy); background: var(--cream); transition: border-color 0.2s, box-shadow 0.2s; letter-spacing: 1px; }
+    input[type="text"]:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,134,42,0.12); }
+    input[type="text"]::placeholder { color: #B0A890; letter-spacing: 0; }
     button#lookupBtn { padding: 12px 22px; background: var(--navy); color: var(--gold-lt); border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: background 0.2s, transform 0.1s, box-shadow 0.2s; }
     button#lookupBtn:hover { background: var(--navy2); box-shadow: 0 4px 16px rgba(12,29,58,0.25); }
     button#lookupBtn:active { transform: scale(0.97); }
@@ -124,7 +124,7 @@
     <div class="anim-fade-up-3">
       <label for="mobileInput">Mobile Number + Month Code (e.g. 1234506789MAR)</label>
       <div class="input-group">
-        <input type="tel" id="mobileInput" placeholder="e.g. 1234506789MAR" maxlength="13" inputmode="text" autocomplete="off" />
+        <input type="text" id="mobileInput" placeholder="e.g. 1234506789MAR" maxlength="13" inputmode="text" autocomplete="off" />
         <button id="lookupBtn">Find Certificate</button>
       </div>
     </div>
