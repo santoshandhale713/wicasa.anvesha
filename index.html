@@ -224,7 +224,7 @@
     if (e.key === "Enter") lookupCertificate();
   });
   document.getElementById("mobileInput").addEventListener("input", function() {
-    this.value = this.value.replace(/\D/g, "");
+    this.value = this.value.replace(/[^0-9A-Za-z]/g, "").toUpperCase();
   });
 </script>
 
